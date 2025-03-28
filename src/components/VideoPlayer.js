@@ -1,4 +1,4 @@
-"use client"; // Required for Next.js App Router
+"use client"; 
 
 import { useState, useRef, useEffect } from "react";
 
@@ -7,20 +7,20 @@ export const VideoPlayer = ({ selectedMedia, updateSelectedMedia }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
 
-  // Play/Pause Function
+  
   const handlePlayPause = () => {
     if (!selectedMedia || !videoRef.current) return;
 
     if (isPlaying) {
       videoRef.current.pause();
     } else {
-      videoRef.current.currentTime = selectedMedia.startTime ?? 0; // Seek to start time
+      videoRef.current.currentTime = selectedMedia.startTime ?? 0; 
       videoRef.current.play();
     }
     setIsPlaying(!isPlaying);
   };
 
-  // Update current time and stop at `endTime`
+ 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;

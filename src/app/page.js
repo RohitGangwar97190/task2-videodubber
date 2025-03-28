@@ -1,8 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { Image, Video, Music, Type, Layers, Play } from "lucide-react";
-
-
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { VideoPlayer } from "@/components/VideoPlayer";
@@ -21,16 +19,23 @@ export default function Home() {
 
   // Handle Play and Pause
   const handlePlayPause = () => {
-    if (!selectedMedia || selectedMedia.type !== "video") return;
-
-    if (isPlaying) {
-      videoRef.current.pause();
-    } else {
-      videoRef.current.currentTime = selectedMedia.startTime || 0;
-      videoRef.current.play();
+    if (!selectedMedia) return;
+  
+    if (selectedMedia.type === "video") {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.currentTime = selectedMedia.startTime || 0;
+        videoRef.current.play();
+      }
+    } else if (selectedMedia.type === "image") {
+      setCurrentTime(selectedMedia.startTime || 0); // Start time for image
+      setIsPlaying(true);
     }
+  
     setIsPlaying(!isPlaying);
   };
+  
 
   // Time update mechanism
   useEffect(() => {
